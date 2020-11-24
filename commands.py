@@ -36,6 +36,7 @@ async def checkjustin():
     
     now = datetime.now()
     current_time = now.strftime("%H")
+    print(current_time)
     late = int(current_time) == 0 
 
     for guild in client.guilds:
