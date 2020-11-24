@@ -2,31 +2,25 @@ import os
 import discord
 
 from discord.ext import commands, tasks
-
 from dotenv import load_dotenv
+
 from datetime import datetime
-
-
-
-intents = discord.Intents.default()
-intents.members = True
-
-now = datetime.now()
-
-current_time = now.strftime("%H")
-late = int(current_time) >= 0 and int(current_time)<=6
-print(late)
-print(current_time)
-
 
 load_dotenv()
 
-TOKEN = os.getenv("discord_token")
-GUILD = os.getenv('DISCORD_GUILD')
-client = commands.Bot(command_prefix="$",intents=intents)
-
 waiwaiid=211617201315119104
 stlid=772395954292654090
+
+TOKEN = os.getenv("discord_token")
+intents = discord.Intents.default()
+intents.members = True
+
+client = commands.Bot(command_prefix="$",intents=intents)
+
+now = datetime.now()
+current_time = now.strftime("%H")
+late = int(current_time) >= 0 and int(current_time)<=6
+
 
 
 
@@ -52,9 +46,7 @@ async def checkjustin():
                     await member.move_to(None)
 
             #print(member.name)
-
-
-    
+   
 @client.command()
 async def memdbers(ctx):
     stl = await client.fetch_guild(stlid)
@@ -65,17 +57,7 @@ async def memdbers(ctx):
 
     await ctx.send("done")
 
-@client.event
-async def on_message(message):
-    if message.content.startswith('$member'):
-        for guild in client.guilds:
-            print(guild.name)
-            for member in guild.members:
-                print(member.name) # or do whatever you wish with the member detail
-
-
 # if time is bewtween 00 and 06 && member name is equal to "wklu", if "wklu" try to join a voice channel, he will be moved out immediately
-
 @client.event
 async def on_voice_state_update(member, before, after):
     # print(member.display_name)
@@ -92,9 +74,6 @@ async def on_voice_state_update(member, before, after):
             await member.move_to(None)
         else:
             await member.send(content = "Enjoy your eveing, " + kid + ".")
-
-    
-
 
 @client.command()
 async def hello(ctx, *args):
@@ -126,5 +105,6 @@ async def server(ctx):
     await ctx.send(embed=embed)
 
 
-#client.loop.create_task(bg_check())
+
 client.run(TOKEN)
+
