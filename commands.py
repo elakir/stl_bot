@@ -33,6 +33,10 @@ async def on_ready():
 
 @tasks.loop(minutes=20)
 async def checkjustin():
+    
+    now = datetime.now()
+    current_time = now.strftime("%H")
+    late = int(current_time) == 0 
 
     for guild in client.guilds:
     
