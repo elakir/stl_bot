@@ -10,7 +10,7 @@ load_dotenv()
 
 waiwaiid=211617201315119104
 stlid=772395954292654090
-
+justin_id=218317191521632257
 TOKEN = os.getenv("discord_token")
 intents = discord.Intents.default()
 intents.members = True
@@ -45,7 +45,7 @@ async def checkjustin():
 
         for member in guild.members:
             if late:
-                if str(member.display_name)== "wklu":
+                if str(member.name)== "wklu":
 
                     await member.send(content = "It is already quite late, " + member.display_name + " should go to bed now.")
                     await member.move_to(None)
@@ -53,12 +53,11 @@ async def checkjustin():
             #print(member.name)
    
 @client.command()
-async def memdbers(ctx):
-    stl = await client.fetch_guild(stlid)
-    members = stl.members
-    print(stl.name)
-    for member in members:
-        await ctx.send(member.name)
+async def members(ctx):
+    for guild in client.guilds:
+        print(guild.name)
+        for member in guild.members:
+            print(str(member.name) + " " + str(member.id))
 
     await ctx.send("done")
 
@@ -70,7 +69,7 @@ async def on_voice_state_update(member, before, after):
     # print(member.id)
     # print(before)
     # print(after)
-    kid = str(member.display_name)
+    kid = str(member.name)
     banname="wklu"
     if late:
 
