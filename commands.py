@@ -19,7 +19,7 @@ client = commands.Bot(command_prefix="$",intents=intents)
 
 now = datetime.now()
 current_time = now.strftime("%H")
-late = int(current_time) >= 0 and int(current_time)<=6
+late = int(current_time) == 0 
 
 
 
@@ -31,7 +31,7 @@ async def on_ready():
     checkjustin.start()
     print("I am conncted to Discord.")
 
-@tasks.loop(minutes=15)
+@tasks.loop(minutes=20)
 async def checkjustin():
 
     for guild in client.guilds:
