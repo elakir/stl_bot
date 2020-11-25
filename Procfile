@@ -1,1 +1,1 @@
-worker: python stl_bot/command.py
+worker: python command.py
