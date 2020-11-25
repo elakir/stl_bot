@@ -2,33 +2,38 @@ import os
 import discord
 
 from discord.ext import commands, tasks
+from datetime import datetime
 from dotenv import load_dotenv
 
-from datetime import datetime
+
+
 
 load_dotenv()
 
 waiwaiid=211617201315119104
 stlid=772395954292654090
 justin_id=218317191521632257
+
 TOKEN = os.getenv("discord_token")
+
+#set up discord intent to enable funtions like members
 intents = discord.Intents.default()
 intents.members = True
 
-client = commands.Bot(command_prefix="$",intents=intents)
-
 now = datetime.now()
 current_time = now.strftime("%H")
+
 late = int(current_time) == 0 
 
 
-
+client = commands.Bot(command_prefix="$",intents=intents)
 
 
 @client.event
 async def on_ready():
 
     checkjustin.start()
+    
     print("I am conncted to Discord.")
 
 @tasks.loop(minutes=20)
