@@ -21,9 +21,11 @@ intents = discord.Intents.default()
 intents.members = True
 
 now = datetime.now()
-current_time = now.strftime("%H")
 
-late = int(current_time) == 0 
+current_time = now.strftime("%H") 
+
+#set trigger on 23, because of the UTC on deployment 
+late = int(current_time) == 23 
 
 
 client = commands.Bot(command_prefix="$",intents=intents)
