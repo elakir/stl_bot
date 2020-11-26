@@ -25,7 +25,7 @@ now = datetime.now()
 current_time = now.strftime("%H") 
 
 #set trigger on 23, because of the UTC on deployment 
-late = int(current_time) == 23 
+late = int(current_time) == 0 
 
 
 client = commands.Bot(command_prefix="$",intents=intents)
@@ -44,20 +44,20 @@ async def checkjustin():
     now = datetime.now()
     current_time = now.strftime("%H")
     print(current_time)
-    late = int(current_time) == 23 
+    late = int(current_time) == 0 
 
     for guild in client.guilds:
     
-        #print(guild.name)
+        print(guild.name)
 
         for member in guild.members:
             if late:
-                if str(member.name)== "wklu":
+                if str(member.name)=="wklu":
 
                     await member.send(content = "It is already quite late, " + member.display_name + " should go to bed now.")
                     await member.move_to(None)
 
-            #print(member.name)
+            print(member.name)
    
 @client.command()
 async def members(ctx):
@@ -77,14 +77,14 @@ async def on_voice_state_update(member, before, after):
     # print(before)
     # print(after)
     kid = str(member.name)
-    banname="wklu"
-    if late:
+   
+    if int(current_time) >= 0 and int(current_time) <= 6:
 
-        if kid==banname:
+        if member.name=="wklu":
             await member.send(content = "It is already quite late, " + kid + ". You should not party anymore")
             await member.move_to(None)
         else:
-            await member.send(content = "Enjoy your eveing, " + kid + ".")
+            await member.send(content = "Enjoy your evening, " + kid + ".")
 
 @client.command()
 async def hello(ctx, *args):
